@@ -2,16 +2,17 @@
 
 int main(void){
 
-int iCelcius;
+float fCelcius;
 float fFahrenheit;
 
-printf("this program can turn Celcius to Fahrenheit:\n");
-printf("Enter Celcius:\n");
-scanf("%d", &iCelcius);
+puts("this program converts temperature in Celcius into Fahrenheit.");
+puts("please enter a temperature in Celcius:");
 
-fFahrenheit=(iCelcius*9)/5+32;
+scanf("%f", &fCelcius);
 
-printf ("Celcius:%d\n", iCelcius);
+fFahrenheit=((float)fCelcius*9)/5+32;
+
+printf ("Celcius:%f\n", fCelcius);
 
 printf ("Fahrenheit:%f\n", fFahrenheit);
 
