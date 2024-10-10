@@ -1,22 +1,21 @@
 #include<stdio.h>
+
 int main (void){
 
-int iTotal=0;
-int iGradecounter=1;
-float fAverage;
+    int iCurrentgrade=0;
+    int iTotal=0;
+    int iGradeCounter=1;
+    float fAverage=0;
+    int iNumOfGrades=10;
 
-while(iGradecounter<=10){
+    while(iGradeCounter<=iNumOfGrades){
+         printf("Enter a grade for student:%d\n", iGradeCounter);
+         scanf("%d", &iCurrentgrade);
+         iTotal+=iCurrentgrade;//shorthand for iTotal=iTotal+iCurrentgrade
+         iGradeCounter++;
+    }//end while
 
-     printf ("counter=%d/n", iGradecounter);
-     iTotal=iTotal+iGradecounter;
-     iGradecounter=iGradecounter+1;
-
-}//end while
-
-fAverage=iTotal/10.0;
-printf("class average=%f/n", fAverage);
-
-
-
+    fAverage=(float)iTotal/iNumOfGrades;
+    printf("class average is:%.2f\n", fAverage);
 
 }//end main
