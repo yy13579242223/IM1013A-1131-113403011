@@ -89,7 +89,7 @@ int main(void){
         puts ("");
          }
         printf("X=R%d, C%d\n", myR, myC);
-        puts("Conferm seat[1/0]:");
+        puts("Confirm seat[1/0]:");
         scanf(" %c", &confirm);
         getchar();
         if(confirm == '1'){
