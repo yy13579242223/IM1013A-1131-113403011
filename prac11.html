@@ -5,10 +5,9 @@
     <style>
         .container {
             display: flex;
-            align-items: flex-start; /* 讓圖片向上對齊 */
-            justify-content: space-between; /* 讓內容左右分散貼齊 */
-            padding: 20px;
-            gap: 0px; /* 控制圖片間的基礎間距 */
+            align-items: flex-start; /* 對齊上方 */
+            position: relative;     /* 關鍵：讓子元素可做絕對定位 */
+            padding-top: 20px;
         }
 
         /* 左圖：圓角，無變形 */
@@ -16,26 +15,30 @@
             width: 33%;
             height: 300px;
             border-radius: 18px;
-            object-fit: cover; 
+            object-fit: cover;
+            margin-right: -75px; /* 往右偏移，讓右側邊緣留出位置給圓形 */
+            z-index: 1;
         }
 
-        /* 中間圖：圓形，直徑 150px */
+        /* 中間圖：圓形，直徑 150px，置於交界 */
         .img-circle {
             width: 150px;
             height: 150px;
             border-radius: 50%;
             border: 2px solid #000;
             object-fit: cover;
-            /* 負 margin 可讓圓形往左右兩側的圖片靠得更近 */
-            margin-left: -50px;
-            margin-right: -50px;
+            position: absolute;  /* 絕對定位 */
+            left: calc(33% - 75px); /* 設定在左圖右邊緣的中心點 */
+            top: 20px;           /* 對齊上方 */
+            z-index: 2;          /* 確保圓形浮在上面 */
         }
 
         /* 右圖：寬 33%，高 300px，有變形 */
         .img-right {
             width: 33%;
             height: 300px;
-            /* 不加 object-fit 會自動拉伸產生 distortion */
+            margin-left: -75px; /* 往左偏移，讓左側邊緣留出位置給圓形 */
+            z-index: 1;
         }
     </style>
 </head>
