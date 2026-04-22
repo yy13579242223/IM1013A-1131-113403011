@@ -2,72 +2,33 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UI Spec Implementation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
-    
     <style>
-        body {
-            display: flex; justify-content: center; align-items: center; min-height: 100vh;
-            background-color: #f0f0f0; margin: 0; font-family: 'Roboto', sans-serif;
-        }
+        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #f0f0f0; margin: 0; font-family: 'Roboto', sans-serif; }
+        
+        .widget-container { width: 496px; background-color: #ffffff; border: 1px solid #dcdcdc; }
 
-        .widget-container {
-            width: 496px; background-color: #ffffff; border: 1px solid #dcdcdc; overflow: hidden;
-        }
-
-        .header {
-            height: 35px; display: flex; justify-content: space-between; align-items: center;
-            padding: 0 15px; border-bottom: 1px solid #eaeaea;
-        }
-
+        .header { height: 35px; display: flex; justify-content: space-between; align-items: center; padding: 0 15px; border-bottom: 1px solid #eaeaea; }
         .header-title { font-size: 13px; color: #707070; }
 
-        .spec-button {
-            height: 22px; border-radius: 8px; border: 1px solid #2f2f2f;
-            background-color: #ffffff; font-size: 13px; padding: 0 18px; cursor: pointer;
-        }
+        .spec-button { height: 22px; border-radius: 8px; border: 1px solid #2f2f2f; background-color: #ffffff; cursor: pointer; padding: 0 18px; }
 
-        /* 滾動區域設定 */
-        .scroll-area {
-            max-height: 400px;
-            overflow-y: auto; /* 啟用原生可操作滑桿 */
-            padding: 20px 0 20px 20px; /* 左邊留白 20px */
-            /* 讓滑桿顯眼的關鍵設定 */
-            scrollbar-width: thin; 
-        }
+        /* 預覽圖片區 */
+        .image-wrapper { width: 450px; height: 240px; background-color: #ffdeb3; margin: 15px auto; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* 強制設定瀏覽器滑桿樣式，寬度為 26px */
-        .scroll-area::-webkit-scrollbar {
-            width: 26px; /* 滑桿區塊總寬 */
-            background-color: #f9f9f9; /* 軌道顏色 */
-            border-left: 1px solid #eaeaea;
-        }
-        .scroll-area::-webkit-scrollbar-thumb {
-            background-color: #c0c0c0; /* 滑塊顏色 */
-            border: 6px solid #f9f9f9; /* 讓滑塊看起來像懸浮在軌道中 */
-            border-radius: 20px;
-        }
+        /* 展開後的詳細資訊區 - 固定 240px 高 */
+        .info-section { display: none; height: 240px; border-top: 1px solid #eaeaea; padding: 10px 0; }
+        .info-section.active { display: flex; } /* 變為 flex 以便與滑桿並排 */
 
-        .content-main { width: 450px; }
+        /* 滑桿所在的容器 */
+        .scroll-content { flex: 1; overflow-y: auto; padding: 0 20px; }
+        
+        /* 自訂 26px 滑桿樣式 */
+        .scroll-content::-webkit-scrollbar { width: 26px; background-color: #f9f9f9; border-left: 1px solid #eaeaea; }
+        .scroll-content::-webkit-scrollbar-thumb { background: #c0c0c0; border: 8px solid #f9f9f9; border-radius: 20px; }
 
-        .image-wrapper {
-            width: 450px; height: 240px; background-color: #ffdeb3;
-            display: flex; justify-content: center; align-items: center;
-            overflow: hidden; margin-bottom: 10px;
-            padding: 0 20px; /* 圖片左右留出橘色空間 */
-            box-sizing: border-box;
-        }
-
-        .image-wrapper img { max-width: 100%; height: auto; }
-
-        .info-section { display: none; }
-        .info-section.active { display: block; }
-
-        .info-row {
-            background-color: #b5ffb5; color: #2f2f2f; font-size: 13px;
-            padding: 2px 8px; margin-bottom: 6px; word-break: break-all;
-        }
+        .info-row { background-color: #b5ffb5; color: #2f2f2f; font-size: 13px; padding: 2px 8px; margin-bottom: 6px; }
     </style>
 </head>
 <body>
@@ -78,19 +39,18 @@
             <button id="infoToggleBtn" class="spec-button">查看資訊</button>
         </div>
 
-        <div class="scroll-area">
-            <div class="content-main">
-                <div class="image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?fit=crop&w=400&h=240&q=80" alt="Preview">
-                </div>
+        <div class="image-wrapper">
+            <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?fit=crop&w=400&h=240&q=80" alt="Preview">
+        </div>
 
-                <div id="fileInfoDetails" class="info-section">
-                    <div class="info-row">修改日期：2017/10/12</div>
-                    <div class="info-row">類別：JPG</div>
-                    <div class="info-row">大小：466.97KB</div>
-                    <div class="info-row">路徑：\\designcenter.qnap.com.tw\DesignCenter\PM\WEB\sample</div>
-                   
-                </div>
+        <div id="fileInfoDetails" class="info-section">
+            <div class="scroll-content">
+                <div class="info-row">修改日期：2017/10/12</div>
+                <div class="info-row">類別：JPG</div>
+                <div class="info-row">大小：466.97KB</div>
+                <div class="info-row">路徑：\\designcenter.qnap.com.tw\DesignCenter\PM\WEB\sample</div>
+                <div class="info-row">備註：這是在 240px 高度限制下顯示的內容</div>
+                <div class="info-row">滑桿現在會正確出現在右側。</div>
             </div>
         </div>
     </div>
