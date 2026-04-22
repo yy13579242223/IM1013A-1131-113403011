@@ -2,37 +2,98 @@
 <html>
 <head>
     <style>
-        .custom-button {
-            /* 基礎尺寸設定 */
-            height: 22px;               /* 對應圖中 h22 */
-            border-radius: 8px;        /* 對應圖中 R8 */
-            
-            /* 顏色與邊框設定 */
-            background-color: #ffffff; /* 對應圖中 background #ffffff */
-            border: 1px solid #2f2f2f; /* 對應圖中 outline 1px #2f2f2f */
-            
-            /* 文字設定 */
-            color: #2f2f2f;            /* 對應圖中 Color #2f2f2f */
-            font-family: sans-serif;   /* Roboto 的通用替代字體 */
-            font-size: 13px;           /* 對應圖中 13px */
-            
-            /* 對齊與間距 */
-            padding: 0 15px;           /* 水平內距讓按鈕有寬度 */
-            cursor: pointer;           /* 滑鼠移入變手勢 */
-            display: inline-flex;
+        body { font-family: sans-serif; padding: 20px; }
+        
+        .list-row {
+            display: flex;
             align-items: center;
-            justify-content: center;
+            border: 1px solid #eaeaea;
+            padding: 10px;
+            background-color: #f6f6f6;
+            width: 800px;
         }
 
-        /* 增加滑鼠懸停效果 (選用) */
-        .custom-button:hover {
-            background-color: #f0f0f0;
+        .preview-area {
+            width: 450px;
+            height: 240px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ccc;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .action-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            height: 22px;
+            border-radius: 8px;
+            border: 1px solid #2f2f2f;
+            background: #ffffff;
+            cursor: pointer;
+            padding: 0 10px;
+            font-size: 13px;
+        }
+
+        /* 展開後的詳細內容區塊 */
+        #moreInfo {
+            display: none; /* 預設隱藏 */
+            width: 770px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+            padding: 10px;
+        }
+
+        /* 滾動區域設定 */
+        .scroll-area {
+            height: 200px; /* 依照你的設計稿設定高度 */
+            overflow-y: auto;
+            background-color: white;
+            padding: 10px;
+        }
+
+        /* 綠色資訊條樣式 */
+        .info-bar {
+            background-color: #66ff66; /* 綠色背景 */
+            padding: 6px 10px;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: #2f2f2f;
         }
     </style>
 </head>
 <body>
 
-    <button class="custom-button">查看資訊</button>
+    <div class="list-row">
+        <span>20171012_1.jpg</span>
+        <div class="preview-area">
+            Default 450x240
+            <button class="action-btn" onclick="toggleDetails()">查看資訊</button>
+        </div>
+    </div>
 
+    <div id="moreInfo">
+        <div style="text-align: right; margin-bottom: 5px;">
+            <button onclick="toggleDetails()">收起資訊</button>
+        </div>
+        
+        <div class="scroll-area">
+            <img src="your-image.jpg" width="400" alt="詳細預覽圖">
+            <div class="info-bar">修改日期 : 2017/10/12</div>
+            <div class="info-bar">類型 : JPG</div>
+            <div class="info-bar">大小 : 466.97KB</div>
+            <div class="info-bar">路徑 : \\designcenter\...\sample</div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDetails() {
+            var x = document.getElementById("moreInfo");
+            x.style.display = (x.style.display === "block") ? "none" : "block";
+        }
+    </script>
 </body>
 </html>
