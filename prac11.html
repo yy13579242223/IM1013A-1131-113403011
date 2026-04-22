@@ -2,54 +2,45 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>CSS Image Styling Layout</title>
     <style>
-        /* 整體容器佈局 */
         .container {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
             gap: 20px;
-            padding: 20px;
         }
 
-        /* 左右兩側圖片規格 (33% 寬度, 300px 高度) */
-        .side-image {
+        /* 左圖：圓角，無變形 */
+        .img-left {
             width: 33%;
             height: 300px;
-            object-fit: cover; /* 確保圖片不失真 */
-        }
-
-        /* 左側圖片：圓角 18px */
-        .rounded {
             border-radius: 18px;
+            object-fit: cover; /* 確保無變形 */
         }
 
-        /* 中間圖片：圓形規格 (150px 寬高, border) */
-        .center-circle {
+        /* 中間圖：圓形，直徑 150px */
+        .img-circle {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            border: 2px solid #333; /* 邊框 */
-            object-fit: cover;      /* 確保圖片不失真 */
+            border: 2px solid #000;
+            object-fit: cover;
+        }
+
+        /* 右圖：寬 33%，高 300px，有變形 */
+        .img-right {
+            width: 33%;
+            height: 300px;
+            /* 移除 object-fit: cover 會導致圖片強制縮放而產生 distortion */
         }
     </style>
 </head>
 <body>
-   <div class="container">
-    <img class="img-left"
-         src="https://picsum.photos/seed/eiffel1/500/400"
-         alt="Eiffel Tower">
 
-    <img class="img-circle"
-         src="https://picsum.photos/seed/fjord/300/300"
-         alt="Landscape">
-
-    <img class="img-right"
-         src="https://picsum.photos/seed/eiffel1/500/400"
-         alt="Eiffel Tower distorted">
-  </div>
-    
+    <div class="container">
+        <img class="img-left" src="https://picsum.photos/seed/eiffel1/500/400" alt="Eiffel Tower">
+        <img class="img-circle" src="https://picsum.photos/seed/fjord/300/300" alt="Landscape">
+        <img class="img-right" src="https://picsum.photos/seed/eiffel1/500/400" alt="Eiffel Tower distorted">
+    </div>
 
 </body>
 </html>
