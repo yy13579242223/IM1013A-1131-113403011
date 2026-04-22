@@ -2,17 +2,17 @@
 <html>
 <head>
     <style>
-        body { font-family: sans-serif; padding: 20px; }
-        
+        body { font-family: sans-serif; padding: 20px; color: #2f2f2f; }
+
         .list-row {
             display: flex;
             align-items: center;
             border: 1px solid #eaeaea;
             padding: 10px;
             background-color: #f6f6f6;
-            width: 800px;
+            width: 496px;
         }
-
+        /* 預覽圖片區塊 */
         .preview-area {
             width: 450px;
             height: 240px;
@@ -23,14 +23,18 @@
             border: 1px solid #ccc;
             margin: 0 20px;
             position: relative;
+            overflow: hidden; /* 確保圖片不超出區域 */
         }
 
+        .preview-area img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* 右上角「查看資訊」按鈕 */
         .action-btn {
             position: absolute;
             top: 10px;
             right: 10px;
             height: 22px;
-            border-radius: 8px;
+            border-radius: 8px; /* R8 */
             border: 1px solid #2f2f2f;
             background: #ffffff;
             cursor: pointer;
@@ -49,8 +53,8 @@
 
         /* 滾動區域設定 */
         .scroll-area {
-            height: 200px; /* 依照你的設計稿設定高度 */
-            overflow-y: auto;
+            height: 200px;
+            overflow-y: auto; /* 自動顯示滾動條 */
             background-color: white;
             padding: 10px;
         }
@@ -61,7 +65,6 @@
             padding: 6px 10px;
             margin-bottom: 6px;
             font-size: 13px;
-            color: #2f2f2f;
         }
     </style>
 </head>
@@ -69,8 +72,9 @@
 
     <div class="list-row">
         <span>20171012_1.jpg</span>
+        
         <div class="preview-area">
-            Default 450x240
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/6018547290937680982_0" alt="河邊風景">
             <button class="action-btn" onclick="toggleDetails()">查看資訊</button>
         </div>
     </div>
@@ -81,11 +85,11 @@
         </div>
         
         <div class="scroll-area">
-            <img src="your-image.jpg" width="400" alt="詳細預覽圖">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/6018547290937680982_0" width="200" alt="詳細圖">
             <div class="info-bar">修改日期 : 2017/10/12</div>
             <div class="info-bar">類型 : JPG</div>
             <div class="info-bar">大小 : 466.97KB</div>
-            <div class="info-bar">路徑 : \\designcenter\...\sample</div>
+            <div class="info-bar">路徑 : \\designcenter\web\sample</div>
         </div>
     </div>
 
