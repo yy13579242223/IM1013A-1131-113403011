@@ -1,40 +1,107 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>響應式佈局練習</title>
-    <style>
-        * { box-sizing: border-box; }
-        body { margin: 0; padding: 20px; background-color: #4da6ff; }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        background: #4da3d9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .card {
+        background: #eee;
+        padding: 15px;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 500px;
+    }
+
+    .box {
+        margin: 8px 0;
+        border-radius: 5px;
+    }
+
+    .header {
+        background: #a8cf45;
+        height: 100px;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .content div {
+        background: #17aeb7;
+        height: 80px;
+    }
+
+    .footer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .footer div {
+        background: #cfd4d7;
+        height: 60px;
+    }
+
+    /* 🔥 RWD：螢幕 >= 480px */
+    @media (min-width: 480px) {
+
+        .card {
+            max-width: 700px;
         }
 
-        /* 區域顏色設定 */
-        .header { height: 100px; background-color: #a8d052; }
-        .main-item { height: 80px; background-color: #00b0c0; }
-        .footer-item { height: 50px; background-color: #e2e2e2; }
-
-        /* 底部區塊容器 */
-        .footer-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+        .content {
+            flex-direction: row;
         }
 
-        /* 當寬度大於 480px 時的變化 */
-        @media (min-width: 480px) {
-            .main-wrapper {
-                display: flex;
-                gap: 10px;
-            }
-            .main-item { flex: 1; height: 150px; }
-            .footer-item { flex: 1; min-width: 20
+        .content div {
+            flex: 1;
+            height: 120px;
+        }
+
+        .footer {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .footer div {
+            height: 80px;
+        }
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="box header"></div>
+
+    <div class="content">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <div class="footer">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+</div>
+
+</body>
+</html>
