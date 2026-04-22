@@ -4,7 +4,8 @@
     <style>
         body { font-family: 'Roboto', sans-serif; color: #2f2f2f; margin: 0; padding: 20px; }
 
-        .list-container {
+        /* 外層容器 */
+        .wrapper {
             display: flex;
             align-items: center;
             border: 1px solid #eaeaea;
@@ -13,41 +14,40 @@
             width: fit-content;
         }
 
-        /* 左側空間 20px */
-        .left-space { width: 20px; }
+        /* 標題「預覽」 */
+        .label {
+            margin-left: 20px; /* 對應左側留白 20 */
+            margin-right: 15px;
+            font-size: 13px;
+            font-weight: bold;
+        }
 
-        /* 預覽區域總寬度 496px */
+        /* 圖片區域總寬度 496px */
         .preview-wrapper {
             width: 496px;
             height: 260px;
             background-color: #fff8e1;
             border: 1px solid #ccc;
+            position: relative; /* 為了讓按鈕絕對定位 */
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            position: relative;
         }
 
-        /* 預覽內框 450x240 */
-        .preview-content {
+        /* 圖片區 450x240 */
+        .img-box {
             width: 450px;
             height: 240px;
             background-color: #eee;
             overflow: hidden;
         }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        .preview-content img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* 確保圖片填滿區域 */
-        }
-
-        /* 按鈕 h22 / R8 */
+        /* 按鈕 h22 / R8 放在預覽區右上 */
         .action-btn {
             position: absolute;
-            top: 15px;
-            right: 18px;
+            top: 10px;
+            right: 10px;
             height: 22px;
             border-radius: 8px;
             border: 1px solid #2f2f2f;
@@ -57,10 +57,10 @@
             cursor: pointer;
         }
 
-        /* 右側空間 26px */
-        .right-space { width: 26px; }
+        /* 右側留白 26px */
+        .right-padding { width: 26px; }
 
-        /* 詳細資訊展開區 */
+        /* 展開資訊區 */
         #moreInfo {
             display: none;
             width: 770px;
@@ -68,35 +68,23 @@
             margin-top: 5px;
             padding: 10px;
         }
-
-        .scroll-area {
-            height: 200px;
-            overflow-y: auto;
-            background-color: white;
-            padding: 10px;
-        }
-
-        .info-bar {
-            background-color: #66ff66;
-            padding: 6px 10px;
-            margin-bottom: 6px;
-            font-size: 13px;
-        }
+        .scroll-area { height: 200px; overflow-y: auto; background-color: white; padding: 10px; }
+        .info-bar { background-color: #66ff66; padding: 6px 10px; margin-bottom: 6px; font-size: 13px; }
     </style>
 </head>
 <body>
 
-    <div class="list-container">
-        <div class="left-space"></div>
-
+    <div class="wrapper">
+        <div class="label">預覽</div>
+        
         <div class="preview-wrapper">
-            <div class="preview-content">
+            <div class="img-box">
                 <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?ixlib=rb-4.0.3&auto=format&fit=crop&w=450&q=80" alt="風景預覽圖">
             </div>
             <button class="action-btn" onclick="toggleDetails()">查看資訊</button>
         </div>
 
-        <div class="right-space"></div>
+        <div class="right-padding"></div>
     </div>
 
     <div id="moreInfo">
@@ -104,7 +92,6 @@
             <button onclick="toggleDetails()">收起資訊</button>
         </div>
         <div class="scroll-area">
-            <img src="http://googleusercontent.com/image_collection/image_retrieval/11708313373894269334_0" width="200" alt="詳細圖">
             <div class="info-bar">修改日期 : 2017/10/12</div>
             <div class="info-bar">類型 : JPG</div>
             <div class="info-bar">大小 : 466.97KB</div>
