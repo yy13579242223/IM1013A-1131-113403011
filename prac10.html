@@ -3,72 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>UI Spec Implementation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
     <style>
-        body {
-            display: flex; justify-content: center; align-items: center; min-height: 100vh;
-            background-color: #f0f0f0; margin: 0; font-family: 'Roboto', sans-serif;
-        }
-
-        /* 主容器寬度 496px */
+        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #f0f0f0; margin: 0; font-family: 'Roboto', sans-serif; }
+        
         .widget-container { width: 496px; background-color: #ffffff; border: 1px solid #dcdcdc; }
 
         .header { height: 35px; display: flex; justify-content: space-between; align-items: center; padding: 0 15px; border-bottom: 1px solid #eaeaea; }
-        .header-title { font-size: 13px; color: #707070; }
+        .spec-button { height: 22px; border-radius: 8px; border: 1px solid #2f2f2f; background-color: #ffffff; cursor: pointer; padding: 0 18px; }
 
-        /* 按鈕 h22 / R8 */
-        .spec-button {
-            height: 22px; border-radius: 8px; border: 1px solid #2f2f2f;
-            background-color: #ffffff; font-size: 13px; padding: 0 18px; cursor: pointer; outline: none;
+        /* 滑動區域：高度涵蓋圖片與資訊欄 */
+        .scrollable-area {
+            height: 400px; /* 這裡調整您需要的高度 */
+            overflow-y: auto;
+            padding: 15px 0 15px 20px;
         }
 
-        /* 圖片區域：450x240 */
-        .image-wrapper {
-            width: 450px; height: 240px; background-color: #ffdeb3;
-            margin: 15px auto; display: flex; justify-content: center; align-items: center; overflow: hidden;
-        }
-        .image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        /* 這裡定義 26px 的滑桿，從圖片頂端開始 */
+        .scrollable-area::-webkit-scrollbar { width: 26px; background-color: #f9f9f9; border-left: 1px solid #eaeaea; }
+        .scrollable-area::-webkit-scrollbar-thumb { background: #c0c0c0; border: 8px solid #f9f9f9; border-radius: 20px; }
 
-        /* 展開資訊區：高度固定 240px */
-        .info-section { display: none; height: 240px; border-top: 1px solid #eaeaea; position: relative; }
-        .info-section.active { display: flex; }
+        /* 圖片區 */
+        .image-wrapper { width: 450px; height: 240px; background-color: #ffdeb3; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0 20px; box-sizing: border-box; }
+        .image-wrapper img { width: 100%; height: auto; }
 
-        /* 滑動內容區 */
-        .scroll-content { flex: 1; overflow-y: auto; padding: 10px 0 10px 20px; }
-
-        /* 26px 滑桿樣式 */
-        .scroll-content::-webkit-scrollbar { width: 26px; background-color: #f9f9f9; border-left: 1px solid #eaeaea; }
-        .scroll-content::-webkit-scrollbar-thumb { 
-            background: #c0c0c0; border: 8px solid #f9f9f9; border-radius: 20px; 
-        }
-
-        .info-row {
-            background-color: #b5ffb5; color: #2f2f2f; font-size: 13px;
-            padding: 2px 8px; margin-bottom: 6px; width: 420px;
-        }
+        /* 資訊欄區 */
+        .info-section { display: none; padding-top: 10px; }
+        .info-section.active { display: block; }
+        .info-row { background-color: #b5ffb5; color: #2f2f2f; font-size: 13px; padding: 2px 8px; margin-bottom: 6px; width: 420px; }
     </style>
 </head>
 <body>
 
     <div class="widget-container">
         <div class="header">
-            <span class="header-title">預覽</span>
+            <span>預覽</span>
             <button id="infoToggleBtn" class="spec-button">查看資訊</button>
         </div>
 
-        <div class="image-wrapper">
-            <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?fit=crop&w=400&h=240&q=80" alt="Preview">
-        </div>
+        <div class="scrollable-area">
+            <div class="image-wrapper">
+                <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?fit=crop&w=400&h=240&q=80" alt="Preview">
+            </div>
 
-        <div id="fileInfoDetails" class="info-section">
-            <div class="scroll-content">
+            <div id="fileInfoDetails" class="info-section">
                 <div class="info-row">修改日期：2017/10/12</div>
                 <div class="info-row">類別：JPG</div>
                 <div class="info-row">大小：466.97KB</div>
                 <div class="info-row">路徑：\\designcenter.qnap.com.tw\DesignCenter\PM\WEB\sample</div>
-                <div class="info-row">測試滑桿功能：當內容超過 240px 高度時，右側將出現 26px 的滑桿供操作。</div>
-                <div class="info-row">這是在滑動後才看得到的內容。</div>
-                <div class="info-row">這是在滑動後才看得到的內容。</div>
+                <div class="info-row">測試滑桿：這部分的內容會觸發滑桿。</div>
+                <div class="info-row">測試滑桿：這部分的內容會觸發滑桿。</div>
             </div>
         </div>
     </div>
