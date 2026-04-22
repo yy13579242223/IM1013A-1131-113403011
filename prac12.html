@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>響應式佈局練習</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 20px; background-color: #4da6ff; }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* 區域顏色設定 */
+        .header { height: 100px; background-color: #a8d052; }
+        .main-item { height: 80px; background-color: #00b0c0; }
+        .footer-item { height: 50px; background-color: #e2e2e2; }
+
+        /* 底部區塊容器 */
+        .footer-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* 當寬度大於 480px 時的變化 */
+        @media (min-width: 480px) {
+            .main-wrapper {
+                display: flex;
+                gap: 10px;
+            }
+            .main-item { flex: 1; height: 150px; }
+            .footer-item { flex: 1; min-width: 20
