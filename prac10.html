@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,14 +17,12 @@
             font-family: 'Roboto', sans-serif;
         }
 
-
         .widget-container {
             width: 496px;
             background-color: #ffffff;
             border: 1px solid #dcdcdc;
             overflow: hidden;
         }
-
 
         .header {
             height: 35px;
@@ -35,11 +33,7 @@
             border-bottom: 1px solid #eaeaea;
         }
 
-        .header-title {
-            font-size: 13px;
-            color: #707070;
-        }
-
+        .header-title { font-size: 13px; color: #707070; }
 
         .spec-button {
             height: 22px;
@@ -53,13 +47,25 @@
             outline: none;
         }
 
- 
+        /* 調整 scroll-area 為彈性佈局 */
         .scroll-area {
-            padding: 20px 26px 20px 20px;
+            display: flex; /* 讓內容與右側滑桿並排 */
+            padding: 20px 0 20px 20px; /* 右側 padding 留給滑桿區 */
             max-height: 400px;
             overflow-y: auto;
         }
 
+        /* 內容區 */
+        .content-main { flex: 1; }
+
+        /* 右側 26px 的滑桿區 */
+        .scrollbar-track {
+            width: 26px;
+            background-color: #f9f9f9;
+            border-left: 1px solid #eaeaea;
+            display: none; /* 預設隱藏，展開資訊時顯示 */
+        }
+        .scrollbar-track.active { display: block; }
 
         .image-wrapper {
             width: 450px;
@@ -71,21 +77,10 @@
             overflow: hidden;
             margin-bottom: 10px;
         }
+        .image-wrapper img { height: 100%; width: auto; display: block; }
 
-        .image-wrapper img {
-            height: 100%;             
-            width: auto;             
-            display: block;
-        }
-
-     
-        .info-section {
-            display: none;
-        }
-
-        .info-section.active {
-            display: block;
-        }
+        .info-section { display: none; }
+        .info-section.active { display: block; }
 
         .info-row {
             background-color: #b5ffb5; 
@@ -94,15 +89,8 @@
             padding: 2px 8px;          
             margin-bottom: 6px;       
             word-break: break-all;
+            width: 434px; /* 扣除 padding 確保對齊 */
         }
-
-        .info-row:last-child {
-            margin-bottom: 0;
-        }
-
-       
-        .scroll-area::-webkit-scrollbar { width: 8px; }
-        .scroll-area::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -114,25 +102,31 @@
         </div>
 
         <div class="scroll-area">
-            <div class="image-wrapper">
-                <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?fit=crop&w=400&h=240&q=80" alt="Preview">
-            </div>
+            <div class="content-main">
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?fit=crop&w=400&h=240&q=80" alt="Preview">
+                </div>
 
-            <div id="fileInfoDetails" class="info-section">
-                <div class="info-row">修改日期：2017/10/12</div>
-                <div class="info-row">類別：JPG</div>
-                <div class="info-row">大小：466.97KB</div>
-                <div class="info-row">路徑：\\designcenter.qnap.com.tw\DesignCenter\PM、RD 請進入\WEB\Stations\A_Image2PDF\v2\sample</div>
+                <div id="fileInfoDetails" class="info-section">
+                    <div class="info-row">修改日期：2017/10/12</div>
+                    <div class="info-row">類別：JPG</div>
+                    <div class="info-row">大小：466.97KB</div>
+                    <div class="info-row">路徑：\\designcenter.qnap.com.tw\DesignCenter\PM、RD 請進入\WEB\Stations\A_Image2PDF\v2\sample</div>
+                </div>
             </div>
+            
+            <div id="scrollbarTrack" class="scrollbar-track"></div>
         </div>
     </div>
 
     <script>
         const toggleBtn = document.getElementById('infoToggleBtn');
         const infoDetails = document.getElementById('fileInfoDetails');
+        const scrollbarTrack = document.getElementById('scrollbarTrack');
 
         toggleBtn.addEventListener('click', function() {
             const isActive = infoDetails.classList.toggle('active');
+            scrollbarTrack.classList.toggle('active');
             toggleBtn.textContent = isActive ? '收起資訊' : '查看資訊';
         });
     </script>
