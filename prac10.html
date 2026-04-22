@@ -41,22 +41,22 @@ body {
     cursor: pointer;
 }
 
-/* 🔥 滾動區（重點） */
+/* 🔥 滾動區（只允許上下） */
 .scroll-area {
-    display: flex;
-    padding-left: 20px; /* ← 圖中標示 */
-    max-height: 300px; /* 強制出現滾動 */
+    padding-left: 20px;
+    max-height: 300px;
     overflow-y: auto;
+    overflow-x: hidden; /* ⭐關鍵：禁止左右滑 */
 }
 
 /* 內容 */
 .content-main {
-    width: calc(100% - 26px); /* 預留 scrollbar 空間 */
+    width: 100%; /* ⭐避免超出 */
 }
 
 /* 圖片 */
 .image-wrapper {
-    width: 450px;
+    width: 100%;   /* ⭐不要寫死450px */
     height: 240px;
     background: #ffdeb3;
     margin-bottom: 10px;
@@ -77,20 +77,21 @@ body {
     display: block;
 }
 
-/* 每一列（符合圖中高度） */
+/* 每一列 */
 .info-row {
     background: #66ff66;
     margin-bottom: 6px;
     padding: 6px 8px;
     font-size: 13px;
-    line-height: 20px; /* 保證高度 */
-    min-height: 10px; /* 圖中要求 */
-    width: 434px;
+    line-height: 20px;
+    min-height: 10px;
+    width: 100%; /* ⭐避免撐出去 */
+    box-sizing: border-box;
 }
 
-/* scrollbar（使用瀏覽器原生但美化） */
+/* scrollbar（只上下） */
 .scroll-area::-webkit-scrollbar {
-    width: 26px; /* ← 圖中要求 */
+    width: 26px;
 }
 
 .scroll-area::-webkit-scrollbar-track {
@@ -100,9 +101,8 @@ body {
 .scroll-area::-webkit-scrollbar-thumb {
     background: #c0c0c0;
     border-radius: 10px;
-    border: 6px solid #f9f9f9; /* 做出中間細條效果 */
+    border: 6px solid #f9f9f9;
 }
-
 </style>
 </head>
 
@@ -128,7 +128,12 @@ body {
                 <div class="info-row">大小：466.97KB</div>
                 <div class="info-row">路徑：\\designcenter.qnap.com.tw\DesignCenter\PM\RD\WEB\solutions\A_Image2PD\v2sample</div>
 
-                
+                <!-- 增加內容讓可滾動 -->
+                <div class="info-row">備註1</div>
+                <div class="info-row">備註2</div>
+                <div class="info-row">備註3</div>
+                <div class="info-row">備註4</div>
+                <div class="info-row">備註5</div>
             </div>
 
         </div>
