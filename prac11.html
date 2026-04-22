@@ -5,40 +5,35 @@
     <style>
         .container {
             display: flex;
-            align-items: flex-start; /* 對齊上方 */
-            position: relative;     /* 關鍵：讓子元素可做絕對定位 */
-            padding-top: 20px;
+            align-items: flex-start;
+            padding: 20px;
         }
 
-        /* 左圖：圓角，無變形 */
-        .img-left {
-            width: 33%;
+        /* 左右圖片：平均分掉剩餘空間 */
+        .img-left,
+        .img-right {
+            width: calc((100% - 150px) / 2);
             height: 300px;
+        }
+
+        /* 左圖：圓角、不變形 */
+        .img-left {
             border-radius: 18px;
             object-fit: cover;
-            margin-right: -75px; /* 往右偏移，讓右側邊緣留出位置給圓形 */
-            z-index: 1;
         }
 
-        /* 中間圖：圓形，直徑 150px，置於交界 */
+        /* 中間圓形 */
         .img-circle {
             width: 150px;
             height: 150px;
             border-radius: 50%;
             border: 2px solid #000;
             object-fit: cover;
-            position: absolute;  /* 絕對定位 */
-            left: calc(33% - 75px); /* 設定在左圖右邊緣的中心點 */
-            top: 20px;           /* 對齊上方 */
-            z-index: 2;          /* 確保圓形浮在上面 */
         }
 
-        /* 右圖：寬 33%，高 300px，有變形 */
+        /* 右圖：保留拉伸效果（示範用） */
         .img-right {
-            width: 33%;
             height: 300px;
-            margin-left: -75px; /* 往左偏移，讓左側邊緣留出位置給圓形 */
-            z-index: 1;
         }
     </style>
 </head>
