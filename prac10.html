@@ -9,7 +9,6 @@
             background-color: #f0f0f0; margin: 0; font-family: sans-serif; 
         }
 
-        /* 主容器寬度 496px */
         .widget-container { 
             width: 496px; background-color: #ffffff; border: 1px solid #dcdcdc; 
         }
@@ -19,27 +18,26 @@
             padding: 0 15px; border-bottom: 1px solid #eaeaea; 
         }
 
-        /* 按鈕規格：h22 / R8 */
         .spec-button {
             height: 22px; border-radius: 8px; border: 1px solid #2f2f2f;
-            background-color: #ffffff; font-size: 13px; padding: 0 18px; cursor: pointer; outline: none;
+            background-color: #ffffff; font-size: 13px; padding: 0 18px; cursor: pointer;
         }
 
-        /* 滑動區域：高度限制在 400px，超過則顯示滑桿 */
+        /* 核心修正：將總高度鎖定在 240px */
         .scroll-area {
-            height: 400px;
+            height: 240px; 
             overflow-y: auto;
             padding: 15px 0 15px 20px;
             box-sizing: border-box;
         }
 
-        /* 定義右側 26px 滑桿樣式 */
+        /* 26px 滑桿設定 */
         .scroll-area::-webkit-scrollbar { width: 26px; background-color: #f9f9f9; border-left: 1px solid #eaeaea; }
         .scroll-area::-webkit-scrollbar-thumb { 
             background: #c0c0c0; border: 8px solid #f9f9f9; border-radius: 20px; 
         }
 
-        /* 圖片區域：450x240 */
+        /* 圖片區域：保持不變 */
         .image-wrapper { 
             width: 450px; height: 240px; background-color: #ffdeb3; 
             display: flex; justify-content: center; align-items: center; overflow: hidden; 
@@ -47,8 +45,8 @@
         }
         .image-wrapper img { width: 100%; height: auto; }
 
-        /* 資訊展開區：初始隱藏 */
-        .info-section { display: none; margin-top: 10px; }
+        /* 資訊展開區 */
+        .info-section { display: none; margin-top: 10px; padding-bottom: 20px; }
         .info-section.active { display: block; }
 
         .info-row { 
