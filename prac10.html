@@ -1,155 +1,141 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-<meta charset="UTF-8">
-<title>UI Spec Implementation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Spec Implementation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
 
-<style>
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #f0f0f0;
-    margin: 0;
-}
 
-/* 外框 */
-.widget-container {
-    width: 496px;
-    background: #fff;
-    border: 1px solid #ccc;
-}
+        .widget-container {
+            width: 496px;
+            background-color: #ffffff;
+            border: 1px solid #dcdcdc;
+            overflow: hidden;
+        }
 
-/* header */
-.header {
-    height: 35px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 15px;
-    border-bottom: 1px solid #ddd;
-}
 
-/* 按鈕 */
-.spec-button {
-    height: 22px;
-    padding: 0 15px;
-    border-radius: 8px;
-    border: 1px solid #000;
-    background: #fff;
-    cursor: pointer;
-}
+        .header {
+            height: 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            border-bottom: 1px solid #eaeaea;
+        }
 
-/* 🔥 滾動區（只允許上下） */
-.scroll-area {
-    padding-left: 20px;
-    max-height: 300px;
-    overflow-y: auto;
-    overflow-x: hidden; /* ⭐關鍵：禁止左右滑 */
-}
+        .header-title {
+            font-size: 13px;
+            color: #707070;
+        }
 
-/* 內容 */
-.content-main {
-    width: 100%; /* ⭐避免超出 */
-}
 
-/* 圖片 */
-.image-wrapper {
-    width: 100%;   /* ⭐不要寫死450px */
-    height: 240px;
-    background: #ffdeb3;
-    margin-bottom: 10px;
-}
+        .spec-button {
+            height: 22px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            border: 1px solid #2f2f2f;
+            color: #2f2f2f;
+            font-size: 13px;
+            padding: 0 18px;
+            cursor: pointer;
+            outline: none;
+        }
 
-.image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+ 
+        .scroll-area {
+            padding: 20px 26px 20px 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
 
-/* 資訊區 */
-.info-section {
-    display: none;
-}
 
-.info-section.active {
-    display: block;
-}
+        .image-wrapper {
+            width: 450px;
+            height: 240px;
+            background-color: #ffdeb3; 
+            display: flex;
+            justify-content: center;   
+            align-items: flex-start;   
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
 
-/* 每一列 */
-.info-row {
-    background: #66ff66;
-    margin-bottom: 6px;
-    padding: 6px 8px;
-    font-size: 13px;
-    line-height: 20px;
-    min-height: 10px;
-    width: 100%; /* ⭐避免撐出去 */
-    box-sizing: border-box;
-}
+        .image-wrapper img {
+            height: 100%;             
+            width: auto;             
+            display: block;
+        }
 
-/* scrollbar（只上下） */
-.scroll-area::-webkit-scrollbar {
-    width: 26px;
-}
+     
+        .info-section {
+            display: none;
+        }
 
-.scroll-area::-webkit-scrollbar-track {
-    background: #f9f9f9;
-}
+        .info-section.active {
+            display: block;
+        }
 
-.scroll-area::-webkit-scrollbar-thumb {
-    background: #c0c0c0;
-    border-radius: 10px;
-    border: 6px solid #f9f9f9;
-}
-</style>
+        .info-row {
+            background-color: #b5ffb5; 
+            color: #2f2f2f;
+            font-size: 13px;
+            padding: 2px 8px;          
+            margin-bottom: 6px;       
+            word-break: break-all;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+
+       
+        .scroll-area::-webkit-scrollbar { width: 8px; }
+        .scroll-area::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+    </style>
 </head>
-
 <body>
 
-<div class="widget-container">
+    <div class="widget-container">
+        <div class="header">
+            <span class="header-title">預覽</span>
+            <button id="infoToggleBtn" class="spec-button">查看資訊</button>
+        </div>
 
-    <div class="header">
-        <span>預覽</span>
-        <button id="btn" class="spec-button">查看資訊</button>
-    </div>
-
-    <div class="scroll-area">
-        <div class="content-main">
-
+        <div class="scroll-area">
             <div class="image-wrapper">
-                <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?fit=crop&w=400&h=240&q=80">
+                <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?fit=crop&w=400&h=240&q=80" alt="Preview">
             </div>
 
-            <div id="info" class="info-section">
+            <div id="fileInfoDetails" class="info-section">
                 <div class="info-row">修改日期：2017/10/12</div>
                 <div class="info-row">類別：JPG</div>
                 <div class="info-row">大小：466.97KB</div>
-                <div class="info-row">路徑：\\designcenter.qnap.com.tw\DesignCenter\PM\RD\WEB\solutions\A_Image2PD\v2sample</div>
-
-                <!-- 增加內容讓可滾動 -->
-                <div class="info-row">備註1</div>
-                <div class="info-row">備註2</div>
-                <div class="info-row">備註3</div>
-                <div class="info-row">備註4</div>
-                <div class="info-row">備註5</div>
+                <div class="info-row">路徑：\\designcenter.qnap.com.tw\DesignCenter\PM、RD 請進入\WEB\Stations\A_Image2PDF\v2\sample</div>
             </div>
-
         </div>
     </div>
 
-</div>
+    <script>
+        const toggleBtn = document.getElementById('infoToggleBtn');
+        const infoDetails = document.getElementById('fileInfoDetails');
 
-<script>
-const btn = document.getElementById('btn');
-const info = document.getElementById('info');
-
-btn.onclick = () => {
-    const active = info.classList.toggle('active');
-    btn.textContent = active ? '收起資訊' : '查看資訊';
-};
-</script>
+        toggleBtn.addEventListener('click', function() {
+            const isActive = infoDetails.classList.toggle('active');
+            toggleBtn.textContent = isActive ? '收起資訊' : '查看資訊';
+        });
+    </script>
 
 </body>
 </html>
