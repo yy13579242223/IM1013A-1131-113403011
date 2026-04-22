@@ -5,8 +5,10 @@
     <style>
         .container {
             display: flex;
-            align-items: center;
-            gap: 20px;
+            align-items: flex-start; /* 讓圖片向上對齊 */
+            justify-content: space-between; /* 讓內容左右分散貼齊 */
+            padding: 20px;
+            gap: 10px; /* 控制圖片間的基礎間距 */
         }
 
         /* 左圖：圓角，無變形 */
@@ -14,7 +16,7 @@
             width: 33%;
             height: 300px;
             border-radius: 18px;
-            object-fit: cover; /* 確保無變形 */
+            object-fit: cover; 
         }
 
         /* 中間圖：圓形，直徑 150px */
@@ -24,13 +26,16 @@
             border-radius: 50%;
             border: 2px solid #000;
             object-fit: cover;
+            /* 負 margin 可讓圓形往左右兩側的圖片靠得更近 */
+            margin-left: -50px;
+            margin-right: -50px;
         }
 
         /* 右圖：寬 33%，高 300px，有變形 */
         .img-right {
             width: 33%;
             height: 300px;
-            /* 移除 object-fit: cover 會導致圖片強制縮放而產生 distortion */
+            /* 不加 object-fit 會自動拉伸產生 distortion */
         }
     </style>
 </head>
