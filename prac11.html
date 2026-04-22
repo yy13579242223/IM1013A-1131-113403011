@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Image Styling Layout</title>
+    <style>
+        /* 整體容器佈局 */
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* 左右兩側圖片規格 (33% 寬度, 300px 高度) */
+        .side-image {
+            width: 33%;
+            height: 300px;
+            object-fit: cover; /* 確保圖片不失真 */
+        }
+
+        /* 左側圖片：圓角 18px */
+        .rounded {
+            border-radius: 18px;
+        }
+
+        /* 中間圖片：圓形規格 (150px 寬高, border) */
+        .center-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 2px solid #333; /* 邊框 */
+            object-fit: cover;      /* 確保圖片不失真 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="http://googleusercontent.com/image_collection/image_retrieval/13461614126568781288_0" 
+             alt="Eiffel Tower" class="side-image rounded">
+
+        <img src="http://googleusercontent.com/image_collection/image_retrieval/17047100736515782081_0" 
+             alt="Mountain Cliff" class="center-circle">
+
+        <img src="http://googleusercontent.com/image_collection/image_retrieval/13461614126568781288_0" 
+             alt="Eiffel Tower" class="side-image">
+    </div>
+
+</body>
+</html>
