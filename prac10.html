@@ -2,66 +2,82 @@
 <html>
 <head>
     <style>
-        body { font-family: sans-serif; padding: 20px; color: #2f2f2f; }
+        body { font-family: 'Roboto', sans-serif; color: #2f2f2f; margin: 0; padding: 20px; }
 
-        .list-row {
+        .list-container {
             display: flex;
             align-items: center;
             border: 1px solid #eaeaea;
-            padding: 10px;
             background-color: #f6f6f6;
-            width: 496px;
+            padding: 10px 0;
+            width: fit-content;
         }
-        /* 預覽圖片區塊 */
-        .preview-area {
-            width: 450px;
-            height: 240px;
-            background-color: #ddd;
+
+        /* 左側空間 20px */
+        .left-space { width: 20px; }
+
+        /* 預覽區域總寬度 496px */
+        .preview-wrapper {
+            width: 496px;
+            height: 260px;
+            background-color: #fff8e1;
+            border: 1px solid #ccc;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            border: 1px solid #ccc;
-            margin: 0 20px;
             position: relative;
-            overflow: hidden; /* 確保圖片不超出區域 */
         }
 
-        .preview-area img { width: 100%; height: 100%; object-fit: cover; }
+        /* 預覽內框 450x240 */
+        .preview-content {
+            width: 450px;
+            height: 240px;
+            background-color: #eee;
+            overflow: hidden;
+        }
 
-        /* 右上角「查看資訊」按鈕 */
+        .preview-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 確保圖片填滿區域 */
+        }
+
+        /* 按鈕 h22 / R8 */
         .action-btn {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 18px;
             height: 22px;
-            border-radius: 8px; /* R8 */
+            border-radius: 8px;
             border: 1px solid #2f2f2f;
-            background: #ffffff;
-            cursor: pointer;
-            padding: 0 10px;
+            background-color: #ffffff;
             font-size: 13px;
+            padding: 0 15px;
+            cursor: pointer;
         }
 
-        /* 展開後的詳細內容區塊 */
+        /* 右側空間 26px */
+        .right-space { width: 26px; }
+
+        /* 詳細資訊展開區 */
         #moreInfo {
-            display: none; /* 預設隱藏 */
+            display: none;
             width: 770px;
             border: 1px solid #ccc;
             margin-top: 5px;
             padding: 10px;
         }
 
-        /* 滾動區域設定 */
         .scroll-area {
             height: 200px;
-            overflow-y: auto; /* 自動顯示滾動條 */
+            overflow-y: auto;
             background-color: white;
             padding: 10px;
         }
 
-        /* 綠色資訊條樣式 */
         .info-bar {
-            background-color: #66ff66; /* 綠色背景 */
+            background-color: #66ff66;
             padding: 6px 10px;
             margin-bottom: 6px;
             font-size: 13px;
@@ -70,22 +86,25 @@
 </head>
 <body>
 
-    <div class="list-row">
-        <span>20171012_1.jpg</span>
-        
-        <div class="preview-area">
-            <img src="http://googleusercontent.com/image_collection/image_retrieval/6018547290937680982_0" alt="河邊風景">
+    <div class="list-container">
+        <div class="left-space"></div>
+
+        <div class="preview-wrapper">
+            <div class="preview-content">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/11708313373894269334_0" alt="夕陽河邊風景">
+            </div>
             <button class="action-btn" onclick="toggleDetails()">查看資訊</button>
         </div>
+
+        <div class="right-space"></div>
     </div>
 
     <div id="moreInfo">
         <div style="text-align: right; margin-bottom: 5px;">
             <button onclick="toggleDetails()">收起資訊</button>
         </div>
-        
         <div class="scroll-area">
-            <img src="http://googleusercontent.com/image_collection/image_retrieval/6018547290937680982_0" width="200" alt="詳細圖">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/11708313373894269334_0" width="200" alt="詳細圖">
             <div class="info-bar">修改日期 : 2017/10/12</div>
             <div class="info-bar">類型 : JPG</div>
             <div class="info-bar">大小 : 466.97KB</div>
