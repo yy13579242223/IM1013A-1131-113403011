@@ -1,91 +1,150 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <title>UI Spec Implementation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
-    <style>
-        body {
-            display: flex; justify-content: center; align-items: center; min-height: 100vh;
-            background-color: #f0f0f0; margin: 0; font-family: sans-serif;
-        }
+<meta charset="UTF-8">
+<title>UI Spec Implementation</title>
 
-        .widget-container {
-            width: 496px; background-color: #ffffff; border: 1px solid #dcdcdc; overflow: hidden;
-        }
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f0f0f0;
+    margin: 0;
+}
 
-        .header {
-            height: 35px; display: flex; justify-content: space-between; align-items: center;
-            padding: 0 15px; border-bottom: 1px solid #eaeaea;
-        }
+/* 外框 */
+.widget-container {
+    width: 496px;
+    background: #fff;
+    border: 1px solid #ccc;
+}
 
-        .spec-button {
-            height: 22px; border-radius: 8px; border: 1px solid #2f2f2f;
-            background-color: #ffffff; cursor: pointer; padding: 0 18px;
-        }
+/* header */
+.header {
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    border-bottom: 1px solid #ddd;
+}
 
-        .scroll-area {
-            display: flex; padding: 20px 0 20px 20px; max-height: 400px; overflow-y: auto;
-        }
+/* 按鈕 */
+.spec-button {
+    height: 22px;
+    padding: 0 15px;
+    border-radius: 8px;
+    border: 1px solid #000;
+    background: #fff;
+    cursor: pointer;
+}
 
-        .content-main { flex: 1; }
+/* 🔥 滾動區（重點） */
+.scroll-area {
+    display: flex;
+    padding-left: 20px; /* ← 圖中標示 */
+    max-height: 300px; /* 強制出現滾動 */
+    overflow-y: auto;
+}
 
-        /* 滑桿軌道區 (寬度 26px) */
-        .scrollbar-track {
-            width: 26px; background-color: #f9f9f9; border-left: 1px solid #eaeaea;
-            display: none; position: relative;
-        }
-        .scrollbar-track.active { display: block; }
+/* 內容 */
+.content-main {
+    width: calc(100% - 26px); /* 預留 scrollbar 空間 */
+}
 
-        /* 滑桿的實體 (滑塊) */
-        .scrollbar-thumb {
-            width: 10px; height: 60px; background-color: #c0c0c0;
-            margin: 10px auto; border-radius: 5px;
-        }
+/* 圖片 */
+.image-wrapper {
+    width: 450px;
+    height: 240px;
+    background: #ffdeb3;
+    margin-bottom: 10px;
+}
 
-        .image-wrapper { width: 450px; height: 240px; background-color: #ffdeb3; margin-bottom: 10px; }
-        .info-section { display: none; }
-        .info-section.active { display: block; }
-        .info-row { background-color: #b5ffb5; padding: 2px 8px; margin-bottom: 6px; width: 434px; font-size: 13px; }
-    </style>
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 資訊區 */
+.info-section {
+    display: none;
+}
+
+.info-section.active {
+    display: block;
+}
+
+/* 每一列（符合圖中高度） */
+.info-row {
+    background: #66ff66;
+    margin-bottom: 6px;
+    padding: 6px 8px;
+    font-size: 13px;
+    line-height: 20px; /* 保證高度 */
+    min-height: 10px; /* 圖中要求 */
+    width: 434px;
+}
+
+/* scrollbar（使用瀏覽器原生但美化） */
+.scroll-area::-webkit-scrollbar {
+    width: 26px; /* ← 圖中要求 */
+}
+
+.scroll-area::-webkit-scrollbar-track {
+    background: #f9f9f9;
+}
+
+.scroll-area::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border-radius: 10px;
+    border: 6px solid #f9f9f9; /* 做出中間細條效果 */
+}
+
+</style>
 </head>
+
 <body>
 
-    <div class="widget-container">
-        <div class="header">
-            <span>預覽</span>
-            <button id="infoToggleBtn" class="spec-button">查看資訊</button>
-        </div>
+<div class="widget-container">
 
-        <div class="scroll-area">
-            <div class="content-main">
-                <div class="image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?fit=crop&w=400&h=240&q=80" alt="Preview">
-                </div>
-                <div id="fileInfoDetails" class="info-section">
-                    <div class="info-row">修改日期：2017/10/12</div>
-                    <div class="info-row">類別：JPG</div>
-                    <div class="info-row">大小：466.97KB</div>
-                    <div class="info-row">路徑：\\designcenter.qnap.com.tw\DesignCenter\PM\WEB\sample</div>
-                </div>
+    <div class="header">
+        <span>預覽</span>
+        <button id="btn" class="spec-button">查看資訊</button>
+    </div>
+
+    <div class="scroll-area">
+        <div class="content-main">
+
+            <div class="image-wrapper">
+                <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?fit=crop&w=400&h=240&q=80">
             </div>
-            
-            <div id="scrollbarTrack" class="scrollbar-track">
-                <div class="scrollbar-thumb"></div>
+
+            <div id="info" class="info-section">
+                <div class="info-row">修改日期：2017/10/12</div>
+                <div class="info-row">類別：JPG</div>
+                <div class="info-row">大小：466.97KB</div>
+                <div class="info-row">路徑：\\designcenter.qnap.com.tw\DesignCenter\PM\RD\WEB\solutions\A_Image2PD\v2sample</div>
+
+                
             </div>
+
         </div>
     </div>
 
-    <script>
-        const toggleBtn = document.getElementById('infoToggleBtn');
-        const infoDetails = document.getElementById('fileInfoDetails');
-        const scrollbarTrack = document.getElementById('scrollbarTrack');
+</div>
 
-        toggleBtn.addEventListener('click', function() {
-            const isActive = infoDetails.classList.toggle('active');
-            scrollbarTrack.classList.toggle('active');
-            toggleBtn.textContent = isActive ? '收起資訊' : '查看資訊';
-        });
-    </script>
+<script>
+const btn = document.getElementById('btn');
+const info = document.getElementById('info');
+
+btn.onclick = () => {
+    const active = info.classList.toggle('active');
+    btn.textContent = active ? '收起資訊' : '查看資訊';
+};
+</script>
+
 </body>
 </html>
