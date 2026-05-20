@@ -1,153 +1,34 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Circle Property Calculator</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f9;
-            color: #333;
-            margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .container {
-            background-color: #ffffff;
-            max-width: 500px;
-            width: 100%;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        h2 {
-            color: #2c3e50;
-            margin-top: 0;
-            border-bottom: 2px solid #ecf0f1;
-            padding-bottom: 10px;
-        }
-        .input-group {
-            margin: 20px 0;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #34495e;
-        }
-        input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.2s;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-        .results {
-            margin-top: 25px;
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-left: 4px solid #3498db;
-            border-radius: 4px;
-        }
-        .results p {
-            margin: 8px 0;
-            font-size: 15px;
-        }
-        .note {
-            font-size: 12px;
-            color: #7f8c8d;
-            margin-top: 15px;
-            text-align: center;
-        }
-    </style>
+    <title>Circle Functions Demonstration</title>
 </head>
 <body>
 
-<div class="container">
-    <h2>圓形屬性計算器</h2>
-    
-    <div class="input-group">
-        <label for="radiusInput">請輸入圓的半徑：</label>
-        <input type="number" id="radiusInput" value="5" min="0" step="any">
-    </div>
-    
-    <button onclick="handleCalculate()">開始計算</button>
-    
-    <div class="results">
-        <strong>網頁畫面輸出結果：</strong>
-        <p id="circumferenceOut">The circumference is --</p>
-        <p id="areaOut">The area is --</p>
-    </div>
-    
-    <p class="note">* 請按下 F12 開啟開發者工具的「主控台 (Console)」查看題目要求的標準輸出。</p>
-</div>
-
-<script>
-    // 1. 計算圓周長的函數
-    function calcCircumfrence(radius) {
-        // 周長公式: 2 * 圓周率 * 半徑
-        var circumference = 2 * Math.PI * radius;
-        // 四捨五入到小數點後兩位，讓顯示更整潔
-        var outputStr = "The circumference is " + circumference.toFixed(2);
-        
-        // 題目要求：輸出到 console
-        console.log(outputStr);
-        return outputStr;
-    }
-
-    // 2. 計算圓面積的函數
-    function calcArea(radius) {
-        // 面積公式: 圓周率 * 半徑平方
-        var area = Math.PI * Math.pow(radius, 2);
-        var outputStr = "The area is " + area.toFixed(2);
-        
-        // 題目要求：輸出到 console
-        console.log(outputStr);
-        return outputStr;
-    }
-
-    // 處理網頁按鈕點擊與畫面更新的輔助函數
-    function handleCalculate() {
-        var radius = parseFloat(document.getElementById('radiusInput').value);
-        
-        if (isNaN(radius) || radius < 0) {
-            alert("請輸入有效的正數字半徑！");
-            return;
+    <script>
+        // 1. Create a function called calcCircumfrence
+        function calcCircumfrence(radius) {
+            // Calculate the circumference based on the radius
+            var circumference = 2 * Math.PI * radius;
+            
+            // Output "The circumference is NN"
+            console.log("The circumference is " + circumference);
         }
-        
-        console.log("--- 開始計算半徑為 " + radius + " 的圓形 ---");
-        
-        // 呼叫題目指定的兩個函數
-        var circResult = calcCircumfrence(radius);
-        var areaResult = calcArea(radius);
-        
-        // 將結果同時同步顯示在網頁畫面上以便檢視
-        document.getElementById('circumferenceOut').innerText = circResult;
-        document.getElementById('areaOut').innerText = areaResult;
-    }
 
-    // 網頁載入時預先自動執行一次預設值 (半徑 5)
-    window.onload = function() {
-        handleCalculate();
-    };
-</script>
+        // 2. Create a function called calcArea
+        function calcArea(radius) {
+            // Calculate the area based on the radius
+            var area = Math.PI * radius * radius;
+            
+            // Output "The area is NN"
+            console.log("The area is " + area);
+        }
+
+        // 網頁載入時自動執行以進行測試（這裡以半徑 5 為例傳入參數）
+        calcCircumfrence(5);
+        calcArea(5);
+    </script>
 
 </body>
 </html>
