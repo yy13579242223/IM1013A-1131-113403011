@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Circle Functions Demonstration</title>
+</head>
+<body>
+
+    <script>
+        // 1. Create a function called calcCircumfrence
+        function calcCircumfrence(radius) {
+            // Calculate the circumference based on the radius
+            var circumference = 2 * Math.PI * radius;
+            
+            // Output "The circumference is NN"
+            console.log("The circumference is " + circumference);
+        }
+
+        // 2. Create a function called calcArea
+        function calcArea(radius) {
+            // Calculate the area based on the radius
+            var area = Math.PI * radius * radius;
+            
+            // Output "The area is NN"
+            console.log("The area is " + area);
+        }
+
+        // 網頁載入時自動執行以進行測試（這裡以半徑 5 為例傳入參數）
+        calcCircumfrence(5);
+        calcArea(5);
+    </script>
+
+</body>
+</html>
